@@ -28,6 +28,11 @@ interface Communication {
             liveData.value = sourse
         }
     }
+    abstract class Post<T>(
+        liveData: MutableLiveData<T> = MutableLiveData()
+    ) : Abstract<T>(liveData) {
+        override fun map(sourse: T) = liveData.postValue(sourse)
+    }
 
     abstract class SingleUi<T> : Ui<T>(SingleLifeEvent())
 }
