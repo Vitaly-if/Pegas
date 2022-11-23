@@ -17,8 +17,7 @@ interface SearchViewModel : ClearError, ObserveSearch, UpdateState {
     ) : ViewModel(), SearchViewModel {
         override fun showResponse(inputId: String) {
             iteractor.saveIdForwarDoc(inputId)
-            navigationCommunication.map(NavigationStrategy.Add(Screen.Responce))
-            communication.showState(UiState.Gone())
+            navigationCommunication.map(NavigationStrategy.Replace(Screen.Responce))
         }
 
         override fun clearError() {
@@ -41,6 +40,7 @@ interface SearchViewModel : ClearError, ObserveSearch, UpdateState {
 interface ClearError {
     fun clearError()
 }
+
 interface UpdateState {
     fun updateState()
 }

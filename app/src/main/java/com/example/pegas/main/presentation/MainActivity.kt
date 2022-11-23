@@ -21,4 +21,11 @@ class MainActivity : AppCompatActivity(), ProvideViewModel {
     override fun <T : ViewModel> provideViewModel(clazz: Class<T>, owner: ViewModelStoreOwner): T =
         (application as ProvideViewModel).provideViewModel(clazz, owner)
 
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.fragments[0].tag != "SearchFragment")
+            super.onBackPressed()
+        else
+            finish()
+    }
 }

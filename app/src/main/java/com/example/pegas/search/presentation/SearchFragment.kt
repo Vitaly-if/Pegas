@@ -43,8 +43,4 @@ class SearchFragment : BaseFragment<SearchViewModel.Base>() {
         override fun afterTextChanged(p0: Editable?) = Unit
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.updateState()
-    }
 }

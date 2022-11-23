@@ -10,7 +10,7 @@ class ResponseModule(
     private val provideRepository: ProvideResponseRepository
 ) : Module<ResponseViewModel.Base> {
     override fun viewModel(): ResponseViewModel.Base {
-return ResponseViewModel.Base()
+return ResponseViewModel.Base(core.provideNavigation())
     }
 }
 interface ProvideResponseRepository {
