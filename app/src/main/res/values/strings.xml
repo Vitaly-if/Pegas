@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Pegas</string>
+    <string name="HeadResponse">По вашему запросу найдена следующая информация</string>
 </resources>
