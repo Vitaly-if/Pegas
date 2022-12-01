@@ -1,9 +1,10 @@
 package com.example.pegas.response.presentation
 
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
+import android.widget.TextView
+import androidx.lifecycle.Observer
 import com.example.pegas.R
 import com.example.pegas.main.presentation.BaseFragment
 
@@ -12,11 +13,19 @@ class ResponseFragment(
     override val viewModelClass = ResponseViewModel.Base::class.java
     override val layoutID = R.layout.fragment_response
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val erView = view.findViewById<TextView>(R.id.erView)
+        val loadView = view.findViewById<TextView>(R.id.loadView)
+        val loadDateView = view.findViewById<TextView>(R.id.loadDateView)
+        val upLoadView = view.findViewById<TextView>(R.id.uploadView)
+        val upLoadDateView = view.findViewById<TextView>(R.id.dateUpLoadView)
+        val mapper = CardForwardDocUi(erView, loadView, loadDateView, upLoadView, upLoadDateView)
+        viewModel.fetchForwardDoc()
+
+        viewModel.observeForwardDocUi(this, Observer {
+            it.map(mapper)
+            Log.i("Vit", "observer ${it.toString()}")
+        })
     }
 }
