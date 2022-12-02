@@ -6,8 +6,6 @@ import retrofit2.http.Path
 
 interface ForwardDocService {
 
-    @GET("forwards/{er}/")
-    suspend fun fetchForwardDoc(
-        @Path("er") er: String
-    ): ResponseBody
+    @GET("forwards/")
+    suspend fun fetchForwardDoc(): ResponseBody
 }
