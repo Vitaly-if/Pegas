@@ -16,7 +16,7 @@ class PegasApp : Application(), ProvideViewModel, ProvideResponseRepository {
     override fun onCreate() {
         super.onCreate()
         val provideInstances = if(BuildConfig.DEBUG)
-            ProvideInstances.Mock(this)
+            ProvideInstances.Release(this)//todo change to mock
         else
             ProvideInstances.Release(this)
         dependencyContainer = DependencyContainer.Base(Core.Base(this, provideInstances))
