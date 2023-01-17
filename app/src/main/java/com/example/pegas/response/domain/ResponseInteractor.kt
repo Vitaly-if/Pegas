@@ -12,8 +12,11 @@ interface ResponseInteractor {
         private val mapperToDomain: ForwardDocToDomain
     ): ResponseInteractor {
         override suspend fun fetchForwardDoc(): ForwardDocResult {
-            return ForwardDocResult.Success(repository.fetchForwardDoc(idForwardDoc.read())
-                .map(mapperToDomain))
+            val forwardDocDomain = repository.fetchForwardDoc(idForwardDoc.read())
+                .map(mapperToDomain)
+            if(forwardDocDomain is ForwardDocDomain.Empty)
+                return ForwardDocResult.Failure("Ошибка эр не найдена")
+            return ForwardDocResult.Success(forwardDocDomain as ForwardDocDomain.Base)
         }
     }
 }

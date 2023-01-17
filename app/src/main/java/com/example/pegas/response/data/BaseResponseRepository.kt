@@ -14,7 +14,7 @@ class BaseResponseRepository(
         val result = data.find {
             it.map(ForwardDocDTO.Mapper.Matcher(id))
         }
-        return result?.map(mapperToData) ?: ForwardDocData("Error in Repository",
+        return result?.map(mapperToData) ?: ForwardDocData("",
             "",
             "",
             "",

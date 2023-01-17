@@ -3,6 +3,7 @@ package com.example.pegas.response.presentation
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import com.example.pegas.R
@@ -20,12 +21,23 @@ class ResponseFragment(
         val loadDateView = view.findViewById<TextView>(R.id.loadDateView)
         val upLoadView = view.findViewById<TextView>(R.id.uploadView)
         val upLoadDateView = view.findViewById<TextView>(R.id.dateUpLoadView)
+        val errorMessageView = view.findViewById<TextView>(R.id.errorMessageTextView)
+        val progressBar = view.findViewById<ProgressBar>(R.id.ProgressBar)
+
         val mapper = CardForwardDocUi(erView, loadView, loadDateView, upLoadView, upLoadDateView)
         viewModel.fetchForwardDoc()
 
         viewModel.observeForwardDocUi(this, Observer {
             it.map(mapper)
             Log.i("Vit", "observer ${it.toString()}")
+        })
+
+        viewModel.observerState(this, Observer {
+            it.apply(erView, loadView, loadDateView, upLoadView, upLoadDateView,errorMessageView)
+        })
+
+        viewModel.observerProgress(this, Observer {
+            progressBar.visibility = it
         })
     }
 }

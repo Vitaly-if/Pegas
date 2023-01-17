@@ -23,7 +23,7 @@ interface ForwardDocCloudDataSourse {
         gson: Gson,
         private val idForwardDoc: IdForwardDoc.Read
     ) : ForwardDocCloudDataSourse.Abstract(gson) {
-        override suspend fun getDataAsString(): String = service.fetchForwardDoc(idForwardDoc.read()).string()
+        override suspend fun getDataAsString(): String = service.fetchForwardDoc().string()
     }
 
     class Mock(

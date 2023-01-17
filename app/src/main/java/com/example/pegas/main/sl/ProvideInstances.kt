@@ -13,9 +13,6 @@ interface ProvideInstances {
         override fun provideCloudModule() = CloudModule.Base()
     }
 
-    class Mock(private val context: Context) : ProvideInstances {
-        override fun provideCacheModule() = CacheModule.Mock(context)
-      override fun provideCloudModule() = CloudModule.Mock()
-    }
+
 
 }
