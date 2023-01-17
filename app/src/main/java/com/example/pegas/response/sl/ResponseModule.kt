@@ -6,6 +6,7 @@ import com.example.pegas.response.data.BaseResponseRepository
 import com.example.pegas.response.data.ForwardDocCloudToData
 import com.example.pegas.response.data.ForwardDocToDomain
 import com.example.pegas.response.data.cloud.ForwardDocCloudDataSourse
+import com.example.pegas.response.data.cloud.ForwardDocService
 import com.example.pegas.response.domain.ForwardDocUiMapper
 import com.example.pegas.response.domain.ResponseInteractor
 import com.example.pegas.response.domain.ResponseRepository
@@ -36,10 +37,13 @@ interface ProvideResponseRepository {
     fun provideResponseRepository(): ResponseRepository
     class Base(private val core: Core) : ProvideResponseRepository {
         override fun provideResponseRepository(): ResponseRepository {
-            return BaseResponseRepository(ForwardDocCloudDataSourse.Mock(
-                core.provideResource().getResource(), core.provideMockGson(),
-                core.provideIdForwardDoc()), ForwardDocCloudToData()
-            )
+            return BaseResponseRepository(ForwardDocCloudDataSourse.Base(core.service(
+                ForwardDocService::class.java), core.provideMockGson(), core.provideIdForwardDoc()),
+                ForwardDocCloudToData())
+//            return BaseResponseRepository(ForwardDocCloudDataSourse.Mock(
+//                core.provideResource().getResource(), core.provideMockGson(),
+//                core.provideIdForwardDoc()), ForwardDocCloudToData()
+//            )
         }
     }
 }

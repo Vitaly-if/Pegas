@@ -12,12 +12,14 @@ class ForwardDocUiResultMapper(
     private val mapper: ForwardDocDomain.Mapper<ForwardDocUi>,
 ) : ForwardDocResult.Mapper<Unit> {
 
-    override fun map(doc: ForwardDocDomain, errorMessage: String) {
-        Log.i("Vital", doc.map(mapper).toString())
+    override fun map(doc: ForwardDocDomain.Base, errorMessage: String) {
+
         if (errorMessage.isEmpty()) {
             communication.show(doc.map(mapper))
             Log.i("Vital", doc.map(mapper).toString())
-            ForwardDocUiState.Success()
-        } else ForwardDocUiState.ShowError(errorMessage)
+            communication.showState(ForwardDocUiState.Success())
+        } else communication.showState(ForwardDocUiState.ShowError("Данная эр не найдена"))//todo set erorMessage
     }
+
+
 }

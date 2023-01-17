@@ -8,6 +8,8 @@ class ForwardDocToDomain : ForwardDocData.Mapper<ForwardDocDomain> {
         unload: String,
         dateUnLoad: String
     ): ForwardDocDomain {
-        return ForwardDocDomain(id, er, load, dateLoad, unload, dateUnLoad)
+        if (id.isEmpty())
+            return ForwardDocDomain.Empty
+        return ForwardDocDomain.Base(id, er, load, dateLoad, unload, dateUnLoad)
     }
 }

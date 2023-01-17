@@ -28,11 +28,11 @@ interface ResponseViewModel: ObserveResponse {
         }
 
         override fun observerProgress(owner: LifecycleOwner, observer: Observer<Int>) {
-            TODO("Not yet implemented")
+            communications.observerProgress(owner, observer)
         }
 
         override fun observerState(owner: LifecycleOwner, observer: Observer<ForwardDocUiState>) {
-            TODO("Not yet implemented")
+            communications.observerState(owner, observer)
         }
 
         override fun observeForwardDocUi(owner: LifecycleOwner, observer: Observer<ForwardDocUi>) =
