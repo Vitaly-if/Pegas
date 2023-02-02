@@ -38,12 +38,8 @@ interface ProvideResponseRepository {
     class Base(private val core: Core) : ProvideResponseRepository {
         override fun provideResponseRepository(): ResponseRepository {
             return BaseResponseRepository(ForwardDocCloudDataSourse.Base(core.service(
-                ForwardDocService::class.java), core.provideMockGson(), core.provideIdForwardDoc()),
+                ForwardDocService::class.java), core.provideMockGson()),
                 ForwardDocCloudToData())
-//            return BaseResponseRepository(ForwardDocCloudDataSourse.Mock(
-//                core.provideResource().getResource(), core.provideMockGson(),
-//                core.provideIdForwardDoc()), ForwardDocCloudToData()
-//            )
         }
     }
 }
