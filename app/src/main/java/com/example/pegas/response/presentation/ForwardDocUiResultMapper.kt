@@ -1,6 +1,5 @@
 package com.example.pegas.response.presentation
 
-import android.util.Log
 import com.example.pegas.response.domain.ForwardDocDomain
 import com.example.pegas.response.domain.ForwardDocResult
 
@@ -16,9 +15,8 @@ class ForwardDocUiResultMapper(
 
         if (errorMessage.isEmpty()) {
             communication.show(doc.map(mapper))
-            Log.i("Vital", doc.map(mapper).toString())
             communication.showState(ForwardDocUiState.Success())
-        } else communication.showState(ForwardDocUiState.ShowError("Данная эр не найдена"))//todo set erorMessage
+        } else communication.showState(ForwardDocUiState.ShowError(errorMessage))
     }
 
 

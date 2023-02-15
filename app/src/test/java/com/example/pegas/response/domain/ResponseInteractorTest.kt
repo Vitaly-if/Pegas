@@ -1,5 +1,6 @@
 package com.example.pegas.response.domain
 
+import com.example.pegas.main.presentation.ResourceProvider
 import com.example.pegas.response.data.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
@@ -14,13 +15,16 @@ class ResponseInteractorTest {
     private lateinit var interactor: ResponseInteractor
     private lateinit var repository: TestBaseResponseRepository
     private lateinit var idForwardDoc: IdForwardDoc.Base
+    private lateinit var managerResources: TestManageResource
 
     @Before
     fun setUp() {
         idForwardDoc = IdForwardDoc.Base()
-        val mapper = ForwardDocToDomain()
+        managerResources = TestManageResource()
         repository = TestBaseResponseRepository()
-        interactor = ResponseInteractor.Base(repository, idForwardDoc, mapper)
+        interactor = ResponseInteractor.Base(repository, idForwardDoc, HandleRequest.Base(
+            HandleError.Base(managerResources), repository, idForwardDoc
+        ))
     }
 
     @Test
@@ -40,22 +44,29 @@ class ResponseInteractorTest {
     @Test
     fun test_fail() = runBlocking {
         idForwardDoc.save("С011503")
+        managerResources.changeExpected("Ошибка эр не найдена")
+        repository.expectingErrorGetForwardDoc(true)
         val actual = interactor.fetchForwardDoc()
-        val expected = ForwardDocResult.Failure(("Ошибка эр не найдена"))
+        val expected = ForwardDocResult.Failure("Ошибка эр не найдена")
         assertEquals(expected, actual)
     }
 
 
     private class TestBaseResponseRepository : ResponseRepository {
-        private var forwardDocData = ForwardDocData("",
+        private var errorWhileForwardDoc = false
+        private var forwardDocDomain = ForwardDocDomain.Base("",
             "",
             "",
             "",
             "",
             "")
 
+        fun expectingErrorGetForwardDoc(error: Boolean) {
+            errorWhileForwardDoc = error
+        }
+
         fun changeExpectedForwardDoc() {
-            forwardDocData = ForwardDocData("0",
+            forwardDocDomain = ForwardDocDomain.Base("0",
                 "С011501",
                 "Улан-Удэ",
                 "27.12.2021",
@@ -63,9 +74,23 @@ class ResponseInteractorTest {
                 "28.12.2021")
         }
 
-        override suspend fun fetchForwardDoc(id: String): ForwardDocData {
-            return forwardDocData
+        override suspend fun fetchForwardDoc(id: String): ForwardDocDomain {
+
+            if (errorWhileForwardDoc)
+                throw IllegalStateException()
+            return forwardDocDomain
         }
+    }
+
+    private class TestManageResource() : ResourceProvider {
+        private var value = ""
+
+        fun changeExpected(string: String) {
+            value = string
+        }
+
+        override fun getString(id: Int): String = value
+
     }
 
 }

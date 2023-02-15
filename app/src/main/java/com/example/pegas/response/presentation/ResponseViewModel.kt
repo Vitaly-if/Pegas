@@ -1,17 +1,13 @@
 package com.example.pegas.response.presentation
 
-import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pegas.main.presentation.NavigationCommunication
 import com.example.pegas.response.domain.ResponseInteractor
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-interface ResponseViewModel: ObserveResponse {
+interface ResponseViewModel : ObserveResponse {
 
     class Base(
         private val navigationCommunication: NavigationCommunication.Mutate,
@@ -22,7 +18,7 @@ interface ResponseViewModel: ObserveResponse {
         ResponseViewModel {
 
         fun fetchForwardDoc() {
-           handleResult.handle(viewModelScope) {
+            handleResult.handle(viewModelScope) {
                 interactor.fetchForwardDoc()
             }
         }

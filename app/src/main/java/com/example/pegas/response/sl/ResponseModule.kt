@@ -7,9 +7,7 @@ import com.example.pegas.response.data.ForwardDocCloudToData
 import com.example.pegas.response.data.ForwardDocToDomain
 import com.example.pegas.response.data.cloud.ForwardDocCloudDataSourse
 import com.example.pegas.response.data.cloud.ForwardDocService
-import com.example.pegas.response.domain.ForwardDocUiMapper
-import com.example.pegas.response.domain.ResponseInteractor
-import com.example.pegas.response.domain.ResponseRepository
+import com.example.pegas.response.domain.*
 import com.example.pegas.response.presentation.*
 
 class ResponseModule(
@@ -18,7 +16,6 @@ class ResponseModule(
 ) : Module<ResponseViewModel.Base> {
     override fun viewModel(): ResponseViewModel.Base {
         val repository = provideRepository.provideResponseRepository()
-        val mapperToDomain = ForwardDocToDomain()
         val responseCommunication = ResponseCommunication.Base(
             ProgressCommunication.Base(),
             ResponseStateCommunication.Base(),
@@ -28,7 +25,10 @@ class ResponseModule(
             HandleForwardDocRequest.Base(core.provideDispatchers(),
                 responseCommunication,
                 ForwardDocUiResultMapper(responseCommunication, ForwardDocUiMapper())),
-            ResponseInteractor.Base(repository, core.provideIdForwardDoc(), mapperToDomain),
+            ResponseInteractor.Base(repository, core.provideIdForwardDoc(),
+                HandleRequest.Base(HandleError.Base(core.provideResource()),
+                    repository,
+                    core.provideIdForwardDoc())),
             responseCommunication)
     }
 }
@@ -39,7 +39,7 @@ interface ProvideResponseRepository {
         override fun provideResponseRepository(): ResponseRepository {
             return BaseResponseRepository(ForwardDocCloudDataSourse.Base(core.service(
                 ForwardDocService::class.java), core.provideMockGson()),
-                ForwardDocCloudToData())
+                ForwardDocCloudToData(), ForwardDocToDomain())
         }
     }
 }
