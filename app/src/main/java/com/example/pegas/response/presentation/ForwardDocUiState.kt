@@ -16,7 +16,7 @@ sealed class ForwardDocUiState {
         loadDateView: TextView,
         unLoadView: TextView,
         unLoadDateView: TextView,
-        errorView: TextView
+        errorView: TextView,
     )
 
     class Success : ForwardDocUiState() {
@@ -27,7 +27,7 @@ sealed class ForwardDocUiState {
             loadDateView: TextView,
             unLoadView: TextView,
             unLoadDateView: TextView,
-            errorView: TextView
+            errorView: TextView,
         ) {
             erView.visibility = View.VISIBLE
             loadView.visibility = View.VISIBLE
@@ -49,7 +49,7 @@ sealed class ForwardDocUiState {
             loadDateView: TextView,
             unLoadView: TextView,
             unLoadDateView: TextView,
-            errorView: TextView
+            errorView: TextView,
         ) {
             erView.visibility = View.GONE
             loadView.visibility = View.GONE
@@ -61,13 +61,7 @@ sealed class ForwardDocUiState {
         }
     }
 
-    data class ShowError(private val text: String) : AbstractError(text, true){
-
-        init{
-
-            Log.i("Vit","ShowError" )
-        }
-    }
+    data class ShowError(private val text: String) : AbstractError(text, true)
 
     class CleanError : AbstractError("", false)
 }

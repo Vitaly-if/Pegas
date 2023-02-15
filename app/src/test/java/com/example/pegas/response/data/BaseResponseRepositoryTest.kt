@@ -1,6 +1,7 @@
 package com.example.pegas.response.data
 
 import com.example.pegas.response.data.cloud.ForwardDocCloudDataSourse
+import com.example.pegas.response.domain.ForwardDocDomain
 import com.google.gson.Gson
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -18,14 +19,17 @@ class BaseResponseRepositoryTest {
     fun setUp() {
         val gson = Gson()
         cloudDataSourse = MockUnit(gson)
-        val mapper = ForwardDocCloudToData()
-        repository = BaseResponseRepository(cloudDataSourse, mapper)
+        val mapperCloudToMapper = ForwardDocCloudToData()
+        val mapperDataToDomain = ForwardDocToDomain()
+
+        repository =
+            BaseResponseRepository(cloudDataSourse, mapperCloudToMapper, mapperDataToDomain)
     }
 
     @Test
     fun test_fetch_forwarddoc() = runBlocking {
         val actual = repository.fetchForwardDoc("С011501")
-        val expected = ForwardDocData("0",
+        val expected = ForwardDocDomain.Base("0",
             "С011501",
             "Улан-Удэ",
             "27.12.2021",
@@ -37,14 +41,10 @@ class BaseResponseRepositoryTest {
     @Test
     fun test_fetch_negative_forwarddoc() = runBlocking {
         val actual = repository.fetchForwardDoc("С011506")
-        val expected = ForwardDocData("",
-            "",
-            "",
-            "",
-            "",
-            "")
+        val expected = ForwardDocDomain.Empty
         assertEquals(expected, actual)
     }
+
     private class MockUnit(
         gson: Gson,
     ) : ForwardDocCloudDataSourse.Abstract(gson) {
