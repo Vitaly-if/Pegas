@@ -23,7 +23,7 @@ class ResponseInteractorTest {
         managerResources = TestManageResource()
         repository = TestBaseResponseRepository()
         interactor = ResponseInteractor.Base(repository, idForwardDoc, HandleRequest.Base(
-            HandleError.Base(managerResources), repository, idForwardDoc
+            HandleError.Base(managerResources)
         ))
     }
 

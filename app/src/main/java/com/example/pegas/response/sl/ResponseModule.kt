@@ -26,9 +26,9 @@ class ResponseModule(
                 responseCommunication,
                 ForwardDocUiResultMapper(responseCommunication, ForwardDocUiMapper())),
             ResponseInteractor.Base(repository, core.provideIdForwardDoc(),
-                HandleRequest.Base(HandleError.Base(core.provideResource()),
-                    repository,
-                    core.provideIdForwardDoc())),
+                HandleRequest.Base(
+                    HandleError.Base(core.provideResource()),
+                )),
             responseCommunication)
     }
 }
