@@ -1,8 +1,8 @@
 package com.example.pegas.response.presentation
 
-import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 
 
 /**
@@ -16,7 +16,10 @@ sealed class ForwardDocUiState {
         loadDateView: TextView,
         unLoadView: TextView,
         unLoadDateView: TextView,
+        cardTopView: CardView,
+        cardCenterView: CardView,
         errorView: TextView,
+        textTitleView: TextView,
     )
 
     class Success : ForwardDocUiState() {
@@ -27,14 +30,20 @@ sealed class ForwardDocUiState {
             loadDateView: TextView,
             unLoadView: TextView,
             unLoadDateView: TextView,
+            cardTopView: CardView,
+            cardCenterView: CardView,
             errorView: TextView,
+            textTitleView: TextView,
         ) {
             erView.visibility = View.VISIBLE
             loadView.visibility = View.VISIBLE
             loadDateView.visibility = View.VISIBLE
             unLoadView.visibility = View.VISIBLE
             unLoadDateView.visibility = View.VISIBLE
+            cardTopView.visibility = View.VISIBLE
+            cardCenterView.visibility = View.VISIBLE
             errorView.visibility = View.GONE
+            textTitleView.visibility = View.VISIBLE
 
         }
     }
@@ -49,15 +58,22 @@ sealed class ForwardDocUiState {
             loadDateView: TextView,
             unLoadView: TextView,
             unLoadDateView: TextView,
+            cardTopView: CardView,
+            cardCenterView: CardView,
             errorView: TextView,
-        ) {
+            textTitleView: TextView,
+
+            ) {
             erView.visibility = View.GONE
             loadView.visibility = View.GONE
             loadDateView.visibility = View.GONE
             unLoadView.visibility = View.GONE
             unLoadDateView.visibility = View.GONE
+            cardTopView.visibility = View.GONE
+            cardCenterView.visibility = View.GONE
             errorView.visibility = View.VISIBLE
             errorView.text = message
+
         }
     }
 

@@ -3,93 +3,220 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<androidx.core.widget.ContentLoadingProgressBar
-    android:id="@+id/ProgressBar"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:indeterminateOnly="true"
-    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-    android:visibility="visible"
-    />
-    <TextView
-        android:id="@+id/textView2"
+    android:background="@color/md_theme_dark_onSecondaryContainer">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_top"
+        style="@style/Widget.Material3.CardView.Elevated"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/HeadResponse"
-        android:textSize="24dp"
+        android:layout_height="201dp"
+        android:layout_marginTop="-20dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"/>
+        tools:visibility="visible">
 
-    <TextView
-        android:id="@+id/erView"
-        android:layout_width="wrap_content"
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/fura">
+
+        </ImageView>
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textTitleView2"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="er"
-        android:textSize="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        android:visibility="gone"/>
+        android:layout_marginTop="8dp"
+        android:text="@string/HeadResponse"
+        android:textColor="@color/md_theme_dark_primaryContainer"
+        android:visibility="gone"
+        android:textSize="28dp"
+        app:layout_constraintStart_toStartOf="@id/card_top"
+        app:layout_constraintTop_toBottomOf="@id/card_top"
+        tools:visibility="visible">
 
-    <TextView
-        android:id="@+id/loadView"
-        android:layout_width="0dp"
+    </com.google.android.material.textview.MaterialTextView>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_response"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="Load"
-        android:textSize="50dp"
+        android:backgroundTint= "@color/md_theme_dark_onSecondaryContainer"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/erView"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toBottomOf="@+id/textTitleView2"
+        tools:visibility="visible">
 
-    <TextView
-        android:id="@+id/loadDateView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="LoadDate"
-        android:textSize="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loadView"
-        android:visibility="gone"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintCentr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/uploadView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="UpLoad"
-        android:textSize="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loadDateView"
-        android:visibility="gone"/>
+            <TextView
+                android:id="@+id/erLabelView"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="Экспедиторская расписка: "
+                android:textSize="22sp"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/constraintCentr"
+                tools:visibility="visible" />
 
-    <TextView
-        android:id="@+id/dateUpLoadView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="DateUoLoad"
-        android:textSize="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/uploadView"
-        android:visibility="gone"/>
+            <TextView
+                android:id="@+id/erView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="er"
+                android:textSize="22sp"
+                android:visibility="visible"
+                app:layout_constraintStart_toEndOf="@+id/erLabelView"
+                app:layout_constraintTop_toTopOf="@+id/erLabelView"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/loadLabelView"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Пункт отправления:  "
+                android:textSize="22sp"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/erLabelView"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/loadView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Load"
+                android:textSize="22sp"
+                android:visibility="visible"
+                app:layout_constraintStart_toEndOf="@+id/loadLabelView"
+                app:layout_constraintTop_toTopOf="@+id/loadLabelView"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/loadDateLabelView"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Дата отправления: "
+                android:textSize="22sp"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/loadLabelView"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/loadDateView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Date"
+                android:textSize="22sp"
+                android:visibility="visible"
+                app:layout_constraintStart_toEndOf="@+id/loadDateLabelView"
+                app:layout_constraintTop_toTopOf="@+id/loadDateLabelView"
+                tools:visibility="visible" />
+
+
+            <TextView
+                android:id="@+id/upLoadLabelView"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Пункт назначения:  "
+                android:textSize="22sp"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/loadDateLabelView"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/upLoadView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Load"
+                android:textSize="22sp"
+                android:visibility="visible"
+                app:layout_constraintStart_toEndOf="@+id/upLoadLabelView"
+                app:layout_constraintTop_toTopOf="@+id/upLoadLabelView"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/upLoadDateLabelView"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Дата назначения: "
+                android:textSize="22sp"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/upLoadLabelView"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/upLoadDateView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Date"
+                android:textSize="22sp"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@+id/upLoadDateLabelView"
+                app:layout_constraintTop_toTopOf="@+id/upLoadDateLabelView"
+                tools:visibility="visible" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/ProgressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:indeterminateOnly="true"
+        android:visibility="visible" />
+
     <TextView
         android:id="@+id/errorMessageTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Eror"
+        android:text="Error"
         android:textSize="50dp"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateUpLoadView" />
+        app:layout_constraintTop_toBottomOf="@id/card_top"
+        tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
