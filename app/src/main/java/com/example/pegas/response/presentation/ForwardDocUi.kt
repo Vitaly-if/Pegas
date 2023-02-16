@@ -1,6 +1,7 @@
 package com.example.pegas.response.presentation
 
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 
 data class ForwardDocUi(
     private val id: String,
@@ -33,13 +34,13 @@ class CardForwardDocUi(
     override fun map(
         id: String, er: String, load: String, dateLoad: String,
         unload: String,
-        dateUnLoad: String,
+        dateUnLoad: String
     ) {
-        erView.text = "er $er"
-        loadView.text = "load $load"
-        loadDateView.text = "date load $dateLoad"
-        unLoadView.text = "unload $unload"
-        unLoadDateView.text = "date UnLoad $dateUnLoad"
+        erView.text = er
+        loadView.text = load
+        loadDateView.text = dateLoad
+        unLoadView.text = unload
+        unLoadDateView.text = dateUnLoad
 
     }
 }

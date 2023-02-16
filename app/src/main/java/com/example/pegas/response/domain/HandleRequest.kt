@@ -1,23 +1,19 @@
 package com.example.pegas.response.domain
 
-import com.example.pegas.response.data.IdForwardDoc
-
 /**
  * @author Vitaly.N on 14.02.2023.
  */
 interface HandleRequest {
 
-    suspend fun handle(block: suspend () -> Unit): ForwardDocResult
+    suspend fun handle(block: suspend () -> ForwardDocDomain): ForwardDocResult
 
     class Base(
         private val handleError: HandleError<String>,
-        private val repository: ResponseRepository,
-        private val idForwardDoc: IdForwardDoc.Read,
     ) : HandleRequest {
 
-        override suspend fun handle(block: suspend () -> Unit): ForwardDocResult = try {
-            block.invoke()
-            ForwardDocResult.Success(repository.fetchForwardDoc(idForwardDoc.read()) as ForwardDocDomain.Base)
+        override suspend fun handle(block: suspend () -> ForwardDocDomain): ForwardDocResult = try {
+           val forwardDocDomain = block.invoke() as ForwardDocDomain.Base
+           ForwardDocResult.Success(forwardDocDomain)
         } catch (e: Exception) {
             ForwardDocResult.Failure(handleError.handle(e))
         }
