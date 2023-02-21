@@ -7,7 +7,14 @@ sealed class ForwardDocResult {
 
     abstract fun <T> map(mapper: Mapper<T>): T
 
-    data class Success(private val doc: ForwardDocDomain.Base) : ForwardDocResult() {
+    data class Success(
+        private val doc: ForwardDocDomain.Base = ForwardDocDomain.Base("",
+            "",
+            "",
+            "",
+            "",
+            ""),
+    ) : ForwardDocResult() {
         override fun <T> map(mapper: Mapper<T>): T {
             return mapper.map(doc, "")
         }
