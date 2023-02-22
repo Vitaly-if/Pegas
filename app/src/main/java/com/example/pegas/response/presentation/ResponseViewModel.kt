@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.pegas.main.presentation.NavigationCommunication
 import com.example.pegas.response.domain.ResponseInteractor
 
-interface ResponseViewModel : ObserveResponse {
+interface ResponseViewModel : ObserveResponse, FetchForwardDoc {
 
     class Base(
         private val navigationCommunication: NavigationCommunication.Mutate,
@@ -17,7 +17,7 @@ interface ResponseViewModel : ObserveResponse {
     ) : ViewModel(),
         ResponseViewModel {
 
-        fun fetchForwardDoc() {
+        override fun fetchForwardDoc() {
             handleResult.handle(viewModelScope) {
                 interactor.fetchForwardDoc()
             }
@@ -34,4 +34,7 @@ interface ResponseViewModel : ObserveResponse {
         override fun observeForwardDocUi(owner: LifecycleOwner, observer: Observer<ForwardDocUi>) =
             communications.observeForwardDocUi(owner, observer)
     }
+}
+interface FetchForwardDoc {
+    fun fetchForwardDoc()
 }
